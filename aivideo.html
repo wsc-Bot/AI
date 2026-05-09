@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正定庙会 - 智绘正定</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+
+        :root {
+            --primary-color: #c8102e;
+            --secondary-color: #f8f0e8;
+            --dark-color: #2c2c2c;
+            --light-color: #fff;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/1920/300?templefair') center/cover no-repeat;
+            color: var(--light-color);
+            text-align: center;
+            padding: 4rem 5%;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            background: var(--light-color);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a.active, .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .panel-container {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .panel h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .panel p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+        }
+
+        .func-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .func-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+        }
+
+        .func-btn.active {
+            background: #a80e24;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .event-grid, .food-grid, .heritage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .event-card, .food-card, .heritage-card {
+            background: var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .event-card:hover, .food-card:hover, .heritage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: #f0e6d8;
+        }
+
+        .event-card .event-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-card h3, .food-card strong, .heritage-card strong {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .event-card p, .food-card p, .heritage-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .heritage-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .event-detail {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .event-detail h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            background: var(--light-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .detail-item .detail-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            columns: 2;
+            gap: 1rem;
+        }
+
+        .highlights-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .highlights-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .info-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(44,44,44,0.8));
+            z-index: 1000;
+            display: none;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 92vh;
+            overflow: hidden;
+            animation: modalFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .modal-content:hover .modal-image {
+            transform: scale(1.05);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), #e81a3a);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 1.8rem;
+            background: linear-gradient(to bottom, #fffaf5, #ffffff);
+            max-height: calc(92vh - 220px - 60px);
+            overflow-y: auto;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, #fff5f5, #ffffff);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #ffe0e0;
+            box-shadow: 0 2px 8px rgba(200, 16, 46, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .detail-item .detail-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-item div:nth-child(2) {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            columns: 1;
+            gap: 0;
+        }
+
+        .highlights-list li {
+            padding: 0.7rem 1rem;
+            background: linear-gradient(to right, #fff5f5, #ffffff);
+            margin-bottom: 0.6rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+            color: #555;
+            transition: transform 0.2s ease;
+        }
+
+        .highlights-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #fff0e6, #ffffff);
+            padding: 1.3rem;
+            border-radius: 10px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .info-box h4 {
+            color: #ff9800;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-desc {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .food-detail, .heritage-detail {
+            margin-bottom: 1rem;
+        }
+
+        .food-detail h4, .heritage-detail h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .food-detail ul, .heritage-detail ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .food-detail li, .heritage-detail li {
+            margin-bottom: 0.3rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem 5%;
+            margin-top: 2rem;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.15);
+            background: white;
+        }
+
+        .favorite-btn.active {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .favorite-btn.active::before {
+            content: '❤️';
+        }
+
+        .favorite-btn::before {
+            content: '🤍';
+        }
+
+        .audio-player {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), #e81a3a);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 25px rgba(200, 16, 46, 0.4);
+            z-index: 999;
+            animation: slideUp 0.4s ease;
+        }
+
+        .audio-player.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .audio-player .play-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio-player .play-btn:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .audio-player .audio-info {
+            max-width: 200px;
+        }
+
+        .audio-player .audio-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .audio-player .audio-status {
+            font-size: 0.8rem;
+            opacity: 0.85;
+        }
+
+        .audio-player .close-audio {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .audio-player .close-audio:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        .modal-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-action-btn.favorite {
+            background: linear-gradient(135deg, #fff0f3, #ffe8ec);
+            color: #e83e68;
+        }
+
+        .modal-action-btn.favorite:hover {
+            background: linear-gradient(135deg, #ffe8ec, #ffd0d9);
+        }
+
+        .modal-action-btn.favorite.active {
+            background: linear-gradient(135deg, #ff4d6d, #e83e68);
+            color: white;
+        }
+
+        .modal-action-btn.audio {
+            background: linear-gradient(135deg, #f0f8ff, #e8f4ff);
+            color: #0084ff;
+        }
+
+        .modal-action-btn.audio:hover {
+            background: linear-gradient(135deg, #e8f4ff, #d0e8ff);
+        }
+
+        .modal-action-btn.audio.playing {
+            background: linear-gradient(135deg, #0084ff, #0066cc);
+            color: white;
+        }
+
+        .favorites-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            z-index: 1001;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .favorites-panel.active {
+            right: 0;
+        }
+
+        .favorites-panel .panel-header {
+            background: linear-gradient(135deg, var(--primary-color), #e81a3a);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .favorites-panel .panel-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .favorites-panel .close-panel {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .favorites-panel .close-panel:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .favorites-panel .panel-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .favorites-panel .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #999;
+        }
+
+        .favorites-panel .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .favorite-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .favorite-item .item-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .favorite-item .item-info {
+            flex: 1;
+        }
+
+        .favorite-item .item-info h4 {
+            margin: 0 0 0.3rem;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .favorite-item .item-info p {
+            margin: 0;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .favorite-item .remove-fav {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .favorite-item .remove-fav:hover {
+            color: #e83e68;
+        }
+
+        .favorites-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, #ff4d6d, #e83e68);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 8px 25px rgba(232, 62, 104, 0.4);
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .favorites-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(232, 62, 104, 0.5);
+        }
+
+        .favorites-toggle .badge {
+            background: white;
+            color: #e83e68;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .panel-overlay.active {
+            display: block;
+        }
+
+        .review-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed var(--primary-color);
+            background: #fffaf5;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .review-section h4 {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-list {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .review-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .review-item .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-item .review-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .review-item .review-time {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .review-item .review-rating {
+            color: #ffc107;
+            font-size: 1rem;
+        }
+
+        .review-item .review-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .review-form {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .review-form .rating-input {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .review-form .rating-star {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .review-form .rating-star:hover,
+        .review-form .rating-star.active {
+            transform: scale(1.2);
+        }
+
+        .review-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .review-form .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), #e81a3a);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .review-form .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .share-section {
+            margin-top: 1rem;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-right: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .share-btn.wechat {
+            background: linear-gradient(135deg, #07c160, #06ad56);
+            color: white;
+        }
+
+        .share-btn.wechat:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.4);
+        }
+
+        .share-btn.weibo {
+            background: linear-gradient(135deg, #e6162d, #d60f24);
+            color: white;
+        }
+
+        .share-btn.weibo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 22, 45, 0.4);
+        }
+
+        .share-btn.qq {
+            background: linear-gradient(135deg, #12b7f5, #09a5e0);
+            color: white;
+        }
+
+        .share-btn.qq:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(18, 183, 245, 0.4);
+        }
+
+        .share-btn.copy {
+            background: linear-gradient(135deg, #667eea, #5a6fd6);
+            color: white;
+        }
+
+        .share-btn.copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .share-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .share-toast.active {
+            opacity: 1;
+        }
+
+        .empty-reviews {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .empty-reviews .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏮 正定庙会</h1>
+        <p>春节最大民俗活动 · 体验千年古城的热闹与繁华</p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">首页</a>
+        <a href="daolan.html">智能导览</a>
+        <a href="feiyi.html">非遗体验</a>
+        <a href="aivideo.html" class="active">描绘体验</a>
+        <a href="graph.html">知识图谱</a>
+    </div>
+
+    <div class="panel-container">
+        <div class="panel">
+            <h2>🎪 正定庙会（春节最大民俗活动）</h2>
+            <p>正定庙会是华北地区规模最大的春节民俗活动之一，每年农历正月初一至正月十五盛大举行。活动期间，古城四大街张灯结彩，数十万游客汇聚于此，共同感受传统年味。</p>
+            <p><strong>历史渊源</strong>：正定庙会始于唐代，盛于明清，至今已有千年历史。相传唐代正定已是北方商贸重镇，春节期间各地商人云集，逐渐形成了盛大的庙会。</p>
+            <p><strong>活动特色</strong>：传统戏曲表演、常山战鼓演出、非遗手工艺品展销、特色美食品尝、花灯展示、民俗游戏等丰富多彩的活动。</p>
+            <p><strong>参与规模</strong>：每年吸引游客超过50万人次，涵盖京津冀及周边省市。</p>
+
+            <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--secondary-color); border-radius: 10px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📅 2024年庙会活动安排</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div><strong>正月初一</strong><br>开城仪式、舞龙舞狮</div>
+                    <div><strong>正月初五</strong><br>财神祈福、戏曲专场</div>
+                    <div><strong>正月十五</strong><br>元宵灯会、烟火晚会</div>
+                    <div><strong>每日活动</strong><br>常山战鼓、非遗展演</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <button class="func-btn active" id="btn-temple-fair" onclick="showEventDetail('temple-fair', this)">🎪 庙会详情</button>
+                <button class="func-btn" id="btn-light-show" onclick="showEventDetail('light-show', this)">✨ 灯光秀</button>
+                <button class="func-btn" id="btn-heritage-market" onclick="showEventDetail('heritage-market', this)">🏮 非遗市集</button>
+                <button class="func-btn" id="btn-zhaoyun" onclick="showEventDetail('zhaoyun', this)">🐎 赵云巡城</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>🍲 庙会特色美食</h2>
+            <div class="food-grid">
+                <div class="food-card" onclick="showFoodModal('badawan')">
+                    <strong>🥘 宋记八大碗</strong>
+                    <p>传承百年的正定传统宴席，包括大碗肉、酥肉、丸子等八道经典菜肴。</p>
+                </div>
+                <div class="food-card" onclick="showFoodModal('shaobing')">
+                    <strong>🥖 缸炉烧饼</strong>
+                    <p>外酥里嫩，层层分明，芝麻飘香，是正定最具代表性的传统小吃。</p>
+                </div>
+                <div class="food-card" onclick="showFoodModal('majiaji')">
+                    <strong>🍬 马家鸡</strong>
+                    <p>百年老字号，肉质鲜嫩，香气四溢，是正定传统名吃。</p>
+                </div>
+                <div class="food-card" onclick="showFoodModal('haojia')">
+                    <strong>🥟 郝家排骨</strong>
+                    <p>色泽红润，肉质软烂，味道鲜美，是庙会必尝美食。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>🎭 庙会非遗展演</h2>
+            <div class="heritage-grid">
+                <div class="heritage-card" onclick="showHeritageModal('zhangu')">
+                    <div class="icon">🥁</div>
+                    <strong>常山战鼓</strong>
+                    <p>国家级非遗，气势恢宏的鼓乐表演</p>
+                </div>
+                <div class="heritage-card" onclick="showHeritageModal('bangzi')">
+                    <div class="icon">🎭</div>
+                    <strong>河北梆子</strong>
+                    <p>地方戏曲，唱腔高亢激昂</p>
+                </div>
+                <div class="heritage-card" onclick="showHeritageModal('jianzhi')">
+                    <div class="icon">✂️</div>
+                    <strong>正定剪纸</strong>
+                    <p>精美剪纸艺术，展现民俗风情</p>
+                </div>
+                <div class="heritage-card" onclick="showHeritageModal('gongdeng')">
+                    <div class="icon">🏮</div>
+                    <strong>正定宫灯</strong>
+                    <p>传统宫灯制作技艺展示</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>🎉 四大特色活动</h2>
+            <div class="event-grid">
+                <div class="event-card" onclick="showEventDetail('temple-fair', document.getElementById('btn-temple-fair'))">
+                    <div class="event-icon">🎪</div>
+                    <h3>正定庙会</h3>
+                    <p>春节期间最大的民俗活动，逛市集、看表演、尝美食</p>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">📍 四大街主会场</p>
+                </div>
+                <div class="event-card" onclick="showEventDetail('light-show', document.getElementById('btn-light-show'))">
+                    <div class="event-icon">✨</div>
+                    <h3>古城夜游灯光秀</h3>
+                    <p>璀璨灯光点亮千年古城，沉浸式光影体验</p>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">🌙 每晚18:30-22:00</p>
+                </div>
+                <div class="event-card" onclick="showEventDetail('heritage-market', document.getElementById('btn-heritage-market'))">
+                    <div class="event-icon">🏮</div>
+                    <h3>非遗市集·古风巡游</h3>
+                    <p>非遗手工艺品展销，古风汉服巡游表演</p>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">👘 每日10:00-20:00</p>
+                </div>
+                <div class="event-card" onclick="showEventDetail('zhaoyun', document.getElementById('btn-zhaoyun'))">
+                    <div class="event-icon">🐎</div>
+                    <h3>赵云巡城实景演出</h3>
+                    <p>三国名将赵云巡城表演，重现历史辉煌</p>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">⚔️ 每日10:00/15:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🏮 智绘正定 - AI非遗数字化旅游平台</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">传承非遗文化 · 创新旅游体验</p>
+    </div>
+
+    <div class="share-toast" id="share-toast">链接已复制到剪贴板！</div>
+
+    <button class="favorites-toggle" onclick="toggleFavoritesPanel()">
+        ❤️ 我的收藏 <span class="badge" id="fav-count">0</span>
+    </button>
+
+    <div class="panel-overlay" id="panel-overlay" onclick="toggleFavoritesPanel()"></div>
+
+    <div class="favorites-panel" id="favorites-panel">
+        <div class="panel-header">
+            <h3>❤️ 我的收藏</h3>
+            <button class="close-panel" onclick="toggleFavoritesPanel()">&times;</button>
+        </div>
+        <div class="panel-body" id="favorites-list">
+            <div class="empty-state">
+                <div class="icon">🤍</div>
+                <p>还没有收藏内容</p>
+                <p style="font-size:0.9rem;">点击心形按钮收藏感兴趣的内容</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="audio-player" id="audio-player">
+        <button class="play-btn" id="audio-play-btn" onclick="toggleAudioPlay()">▶</button>
+        <div class="audio-info">
+            <div class="audio-title" id="audio-title">语音导览</div>
+            <div class="audio-status" id="audio-status">点击播放</div>
+        </div>
+        <button class="close-audio" onclick="showAudioText()" style="margin-right:5px;padding:5px 10px;font-size:12px;background:#e3f2fd;color:#1976d2;border-radius:4px;">📝文字</button>
+        <button class="close-audio" onclick="closeAudioPlayer()">&times;</button>
+    </div>
+
+    <div class="modal-overlay" id="food-modal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img class="modal-image" id="food-modal-image" src="" alt="美食图片">
+            </div>
+            <div class="modal-header">
+                <h3 id="modal-title">美食详情</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="heritage-modal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img class="modal-image" id="heritage-modal-image" src="" alt="非遗图片">
+            </div>
+            <div class="modal-header">
+                <h3 id="heritage-modal-title">非遗详情</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="heritage-modal-body"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img class="modal-image" id="event-modal-image" src="" alt="活动图片">
+            </div>
+            <div class="modal-header">
+                <h3 id="event-modal-title">活动详情</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="event-modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        var events = {
+            'temple-fair': {
+                name: '正定庙会',
+                icon: '🎪',
+                image: 'videos/正定庙会.jpg',
+                location: '正定古城四大街及主要景点',
+                time: '春节期间 9:00 - 21:00',
+                ticket: '免费开放，部分活动收费',
+                date: '农历正月初一至正月十五',
+                desc: '正定庙会是千年传承的民俗盛会，集文化、美食、演艺、购物于一体，是华北地区最具影响力的春节庙会之一。',
+                highlights: ['🎭 传统戏曲表演：河北梆子、京剧专场', '🥁 常山战鼓表演：国家级非遗震撼演出', '🎪 非遗展示：剪纸、陶艺、面塑等传统技艺', '🍲 特色美食：宋记八大碗、缸炉烧饼等', '🏮 花灯展示：传统宫灯、现代灯光艺术', '🎶 民俗音乐：传统民乐演奏'],
+                guide: '建议下午3点后入园，先逛市集品尝美食，傍晚观看灯光秀与民俗表演，体验最佳。节假日人流量大，建议错峰出行。'
+            },
+            'light-show': {
+                name: '古城夜游灯光秀',
+                icon: '✨',
+                image: 'videos/灯光秀.jpg',
+                location: '正定古城墙、南城门、隆兴寺、阳和楼',
+                time: '18:30 - 22:00（每30分钟一场）',
+                ticket: '免费观赏',
+                date: '春节期间每晚',
+                desc: '以千年古城为幕，以现代光影为笔，打造沉浸式夜游盛宴，点亮古城夜空，展现正定历史文化魅力。',
+                highlights: ['🏛️ 古城墙3D灯光投影秀', '🌉 南城门光影水幕秀', '🕯️ 隆兴寺古风夜景灯光', '🌟 网红打卡灯光艺术装置', '🚣 护城河梦幻光影走廊', '🎆 元宵节大型烟火表演'],
+                guide: '最佳观赏点：南城门广场、阳和楼、城墙步道。建议19:30-21:00前往，灯光效果最震撼。'
+            },
+            'heritage-market': {
+                name: '非遗市集·古风巡游',
+                icon: '🏮',
+                image: 'videos/非遗市集.jpg',
+                location: '正定古城步行街、燕赵南大街',
+                time: '10:00 - 20:00',
+                ticket: '免费进入',
+                date: '春节期间每日',
+                desc: '汇聚河北及正定非遗传承人，现场展示传统手工艺，汉服巡游互动，让游客沉浸式体验传统文化魅力。',
+                highlights: ['🎨 非遗手工艺品现场展销', '👘 百人汉服古风巡游表演', '✂️ 剪纸、糖画、面塑体验', '📜 书法春联、年画创作展示', '🎵 古典民乐街头演奏', '🍵 传统茶艺、香道文化体验'],
+                guide: '适合亲子游玩，可亲手体验非遗制作，购买特色文创礼品。每日15:00/19:00有大型汉服巡游。'
+            },
+            'zhaoyun': {
+                name: '赵云巡城实景演出',
+                icon: '🐎',
+                image: 'videos/赵云巡城.jpg',
+                location: '正定古城四大街、南城门广场',
+                time: '上午10:00 / 下午15:00（每场40分钟）',
+                ticket: '免费观看',
+                date: '春节期间每日',
+                desc: '以三国名将赵云为主题的大型实景历史演出，还原赵子龙大战长坂坡、镇守正定的历史场景，气势恢宏。',
+                highlights: ['🐎 赵云戎装骑马巡城实景', '⚔️ 古代士兵方阵操练表演', '🎺 仿古军乐仪仗演奏', '🏰 南城门开城迎宾仪式', '📜 历史人物互动情景剧', '🎭 古装实景武术表演'],
+                guide: '最佳观赏点：南城门广场、城隍庙街口。演出前30分钟到场占位，视野更佳。小朋友可与演员合影互动。'
+            }
+        };
+
+        var foodData = {
+            'badawan': {
+                name: '宋记八大碗',
+                icon: '🥘',
+                image: 'videos/宋记八大碗.jpg',
+                history: '宋记八大碗起源于清代，传承至今已有近200年历史，是正定宴席文化的代表。',
+                dishes: ['大碗肉', '酥肉', '丸子', '排骨', '鸡蛋', '豆腐', '海带', '粉条'],
+                features: ['选料讲究', '做工精细', '味道醇厚', '营养丰富'],
+                famous: '2018年入选石家庄市非物质文化遗产名录'
+            },
+            'shaobing': {
+                name: '缸炉烧饼',
+                icon: '🥖',
+                image: 'videos/缸炉烧饼.jpg',
+                history: '缸炉烧饼是正定传统小吃，因其在缸炉中烤制而得名，已有数百年历史。',
+                dishes: ['原味烧饼', '麻酱烧饼', '糖烧饼', '油酥烧饼'],
+                features: ['外酥里嫩', '层层分明', '芝麻飘香', '便于携带'],
+                famous: '正定缸炉烧饼制作技艺被列入河北省非物质文化遗产'
+            },
+            'majiaji': {
+                name: '马家鸡',
+                icon: '🍬',
+                image: 'videos/马家鸡.jpg',
+                history: '马家鸡创始于清代道光年间，是正定著名的老字号，至今已有180多年历史。',
+                dishes: ['五香脱骨鸡', '卤鸡肝', '卤鸡爪', '鸡胗'],
+                features: ['肉质鲜嫩', '香气四溢', '脱骨入味', '咸淡适宜'],
+                famous: '马家鸡制作技艺被列入石家庄市非物质文化遗产'
+            },
+            'haojia': {
+                name: '郝家排骨',
+                icon: '🥟',
+                image: 'videos/郝佳排骨.jpg',
+                history: '郝家排骨始创于1985年，经过三十多年的发展，已成为正定特色美食代表。',
+                dishes: ['招牌排骨', '排骨面', '排骨饭', '排骨火锅'],
+                features: ['色泽红润', '肉质软烂', '味道鲜美', '老少皆宜'],
+                famous: '荣获"河北名小吃"称号'
+            }
+        };
+
+        var heritageData = {
+            'zhangu': {
+                name: '常山战鼓',
+                icon: '🥁',
+                image: 'videos/常山战鼓.jpg',
+                level: '国家级非物质文化遗产',
+                history: '始于战国，盛于明清，因正定古为常山郡而得名，是中国四大名鼓之一。',
+                shows: ['开场鼓', '欢庆鼓', '常胜鼓', '金鼓齐鸣'],
+                features: ['气势磅礴', '节奏鲜明', '历史悠久', '场面壮观'],
+                meaning: '展现正定千年历史文化与豪迈精神'
+            },
+            'bangzi': {
+                name: '河北梆子',
+                icon: '🎭',
+                image: 'videos/河北梆子.jpg',
+                level: '国家级非物质文化遗产',
+                history: '起源于清代，是河北省最具代表性的地方戏曲剧种，唱腔高亢激昂。',
+                shows: ['宝莲灯', '穆桂英挂帅', '秦香莲', '蝴蝶杯'],
+                features: ['唱腔高亢', '表演粗犷', '韵味醇厚', '地方特色'],
+                meaning: '河北地区传统文化艺术瑰宝'
+            },
+            'jianzhi': {
+                name: '正定剪纸',
+                icon: '✂️',
+                image: 'videos/正定剪纸.jpg',
+                level: '河北省非物质文化遗产',
+                history: '正定剪纸历史悠久，风格古朴典雅，题材丰富多样，是民间艺术精华。',
+                shows: ['花鸟剪纸', '人物剪纸', '生肖剪纸', '窗花剪纸'],
+                features: ['刀法细腻', '构图精巧', '色彩鲜艳', '寓意吉祥'],
+                meaning: '民间祈福与装饰的传统艺术'
+            },
+            'gongdeng': {
+                name: '正定宫灯',
+                icon: '🏮',
+                image: 'videos/正定宫灯.jpg',
+                level: '石家庄市非物质文化遗产',
+                history: '始于明代，宫廷技艺传承，工艺精湛，是传统灯饰艺术的典范。',
+                shows: ['六角宫灯', '龙凤宫灯', '花鸟宫灯', '走马灯'],
+                features: ['造型优美', '工艺复杂', '色彩绚丽', '古朴典雅'],
+                meaning: '传统节日与庆典的标志性装饰'
+            }
+        };
+
+        function closeAllModals() {
+            document.getElementById('food-modal').classList.remove('active');
+            document.getElementById('heritage-modal').classList.remove('active');
+            document.getElementById('event-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showEventDetail(eventId, btn) {
+            closeAllModals();
+            var event = events[eventId];
+            if (!event) return;
+
+            var buttons = document.querySelectorAll('.func-btn');
+            buttons.forEach(function(b) {
+                b.classList.remove('active');
+            });
+            if (btn) {
+                btn.classList.add('active');
+            }
+
+            document.getElementById('event-modal-image').src = event.image;
+
+            var highlightsHtml = '';
+            for (var i = 0; i < event.highlights.length; i++) {
+                highlightsHtml += '<li>' + event.highlights[i] + '</li>';
+            }
+
+            document.getElementById('event-modal-title').innerHTML = event.icon + ' ' + event.name;
+
+            var html = '<div class="detail-grid"><div class="detail-item"><div class="detail-label">📍 活动地点</div><div>' + event.location + '</div></div><div class="detail-item"><div class="detail-label">🕒 活动时间</div><div>' + event.time + '</div></div><div class="detail-item"><div class="detail-label">🎫 门票信息</div><div>' + event.ticket + '</div></div><div class="detail-item"><div class="detail-label">📅 举办日期</div><div>' + event.date + '</div></div></div><div class="event-desc"><p style="color:#555;line-height:1.8;">' + event.desc + '</p></div><h4 style="color: var(--primary-color);margin:1.5rem 0 1rem;font-size:1.2rem;">🌟 活动亮点</h4><ul class="highlights-list">' + highlightsHtml + '</ul><div class="info-box" style="margin-top:1.5rem;"><h4 style="margin-bottom:0.8rem;">📌 游玩攻略</h4><p style="color:#555;line-height:1.7;">' + event.guide + '</p></div><div class="modal-actions"><button class="modal-action-btn favorite' + (isFavorite('event', eventId) ? ' active' : '') + '" data-type="event" data-id="' + eventId + '" onclick="toggleFavorite(\'event\', \'' + eventId + '\', \'' + event.name + '\', \'' + event.icon + '\')">' + (isFavorite('event', eventId) ? '❤️ 已收藏' : '🤍 收藏') + '</button><button class="modal-action-btn audio" onclick="startAudioNarration(\'' + event.name + '。' + event.desc + '。活动地点：' + event.location + '。' + event.guide.replace(/'/g, '') + '\', \'' + event.icon + ' ' + event.name + '\')">🎧 语音导览</button></div>' + createReviewSection('event', eventId, event.name) + createShareSection(event.icon + ' ' + event.name);
+            
+            document.getElementById('event-modal-body').innerHTML = html;
+            document.getElementById('event-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showFoodModal(foodId) {
+            closeAllModals();
+            var food = foodData[foodId];
+            if (!food) return;
+
+            document.getElementById('food-modal-image').src = food.image;
+            document.getElementById('modal-title').innerHTML = food.icon + ' ' + food.name;
+            
+            var dishesHtml = '';
+            for (var i = 0; i < food.dishes.length; i++) {
+                dishesHtml += '<li style="padding:0.5rem 0;border-bottom:1px dashed #e0e0e0;">' + food.dishes[i] + '</li>';
+            }
+            var featuresHtml = '';
+            for (var j = 0; j < food.features.length; j++) {
+                featuresHtml += '<span style="display:inline-block;background:linear-gradient(135deg, #fff0f0, #ffe8e8);color:#c8102e;padding:0.4rem 1rem;border-radius:20px;margin:0.3rem;font-size:0.9rem;">' + food.features[j] + '</span>';
+            }
+
+            var html = '<div class="food-detail"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">📜 历史渊源</h4><p style="color:#555;line-height:1.8;">' + food.history + '</p></div>' +
+                '<div class="food-detail" style="margin-top:1.5rem;"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">🍽️ 经典菜品</h4><ul style="list-style:none;padding:0;">' + dishesHtml + '</ul></div>' +
+                '<div class="food-detail" style="margin-top:1.5rem;"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">✨ 特色亮点</h4><div style="display:flex;flex-wrap:wrap;gap:0.5rem;">' + featuresHtml + '</div></div>' +
+                '<div class="food-detail" style="margin-top:1.5rem;padding:1.2rem;background:linear-gradient(135deg, #fff5e6, #fffaf0);border-radius:10px;border-left:4px solid var(--primary-color);"><h4 style="color:var(--primary-color);margin-bottom:0.5rem;font-size:1.1rem;">🏆 荣誉认证</h4><p style="color:#555;margin:0;">' + food.famous + '</p></div>' +
+                '<div class="modal-actions"><button class="modal-action-btn favorite' + (isFavorite('food', foodId) ? ' active' : '') + '" data-type="food" data-id="' + foodId + '" onclick="toggleFavorite(\'food\', \'' + foodId + '\', \'' + food.name + '\', \'' + food.icon + '\')">' + (isFavorite('food', foodId) ? '❤️ 已收藏' : '🤍 收藏') + '</button><button class="modal-action-btn audio" onclick="startAudioNarration(\'' + food.name + '。' + food.history + '。经典菜品包括：' + food.dishes.join('、') + '。' + food.famous + '\', \'' + food.icon + ' ' + food.name + '\')">🎧 语音导览</button></div>' + createReviewSection('food', foodId, food.name) + createShareSection(food.icon + ' ' + food.name);
+            
+            document.getElementById('modal-body').innerHTML = html;
+            document.getElementById('food-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showHeritageModal(heritageId) {
+            closeAllModals();
+            var data = heritageData[heritageId];
+            if (!data) return;
+
+            document.getElementById('heritage-modal-image').src = data.image;
+            document.getElementById('heritage-modal-title').innerHTML = data.icon + ' ' + data.name;
+            
+            var showsHtml = '';
+            for (var i = 0; i < data.shows.length; i++) {
+                showsHtml += '<li style="padding:0.5rem 0;border-bottom:1px dashed #e0e0e0;">' + data.shows[i] + '</li>';
+            }
+            var featuresHtml = '';
+            for (var j = 0; j < data.features.length; j++) {
+                featuresHtml += '<span style="display:inline-block;background:linear-gradient(135deg, #f0f0ff, #e8e8ff);color:#6a5acd;padding:0.4rem 1rem;border-radius:20px;margin:0.3rem;font-size:0.9rem;">' + data.features[j] + '</span>';
+            }
+
+            var html = '<div class="heritage-detail" style="padding:1rem;background:linear-gradient(135deg, #fff0f0, #fff5f5);border-radius:10px;border-left:4px solid var(--primary-color);margin-bottom:1.5rem;"><h4 style="color:var(--primary-color);margin-bottom:0.5rem;font-size:1.1rem;">🏅 非遗等级</h4><p style="color:#555;margin:0;font-weight:500;">' + data.level + '</p></div>' +
+                '<div class="heritage-detail"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">📜 历史渊源</h4><p style="color:#555;line-height:1.8;">' + data.history + '</p></div>' +
+                '<div class="heritage-detail" style="margin-top:1.5rem;"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">🎬 经典剧目/样式</h4><ul style="list-style:none;padding:0;">' + showsHtml + '</ul></div>' +
+                '<div class="heritage-detail" style="margin-top:1.5rem;"><h4 style="color:var(--primary-color);margin-bottom:0.8rem;font-size:1.15rem;">✨ 艺术特色</h4><div style="display:flex;flex-wrap:wrap;gap:0.5rem;">' + featuresHtml + '</div></div>' +
+                '<div class="heritage-detail" style="margin-top:1.5rem;padding:1.2rem;background:linear-gradient(135deg, #f0fff4, #f5fff8);border-radius:10px;border-left:4px solid #228b22;"><h4 style="color:#228b22;margin-bottom:0.5rem;font-size:1.1rem;">💡 文化意义</h4><p style="color:#555;margin:0;line-height:1.7;">' + data.meaning + '</p></div>' +
+                '<div class="modal-actions"><button class="modal-action-btn favorite' + (isFavorite('heritage', heritageId) ? ' active' : '') + '" data-type="heritage" data-id="' + heritageId + '" onclick="toggleFavorite(\'heritage\', \'' + heritageId + '\', \'' + data.name + '\', \'' + data.icon + '\')">' + (isFavorite('heritage', heritageId) ? '❤️ 已收藏' : '🤍 收藏') + '</button><button class="modal-action-btn audio" onclick="startAudioNarration(\'' + data.name + '。' + data.level + '。' + data.history + '。艺术特色：' + data.features.join('、') + '。' + data.meaning + '\', \'' + data.icon + ' ' + data.name + '\')">🎧 语音导览</button></div>' + createReviewSection('heritage', heritageId, data.name) + createShareSection(data.icon + ' ' + data.name);
+            
+            document.getElementById('heritage-modal-body').innerHTML = html;
+            document.getElementById('heritage-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.querySelectorAll('.modal-close').forEach(function(btn) {
+            btn.addEventListener('click', closeAllModals);
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+            overlay.addEventListener('click', function(e) {
+                if(e.target === overlay) closeAllModals();
+            });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape') closeAllModals();
+        });
+
+        var favorites = JSON.parse(localStorage.getItem('zhengding_favorites')) || [];
+        var currentAudioText = '';
+        var isPlaying = false;
+        var speechSynthesis = window.speechSynthesis;
+        var voices = [];
+
+        function loadVoices() {
+            voices = speechSynthesis.getVoices();
+        }
+
+        if (speechSynthesis) {
+            loadVoices();
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function updateFavoritesCount() {
+            document.getElementById('fav-count').textContent = favorites.length;
+        }
+
+        function isFavorite(type, id) {
+            return favorites.some(function(f) { return f.type === type && f.id === id; });
+        }
+
+        function toggleFavorite(type, id, name, icon) {
+            var index = favorites.findIndex(function(f) { return f.type === type && f.id === id; });
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push({ type: type, id: id, name: name, icon: icon });
+            }
+            localStorage.setItem('zhengding_favorites', JSON.stringify(favorites));
+            updateFavoritesCount();
+            updateFavoriteButtons();
+            renderFavoritesList();
+        }
+
+        function updateFavoriteButtons() {
+            document.querySelectorAll('.modal-action-btn.favorite').forEach(function(btn) {
+                var type = btn.dataset.type;
+                var id = btn.dataset.id;
+                if (isFavorite(type, id)) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '❤️ 已收藏';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '🤍 收藏';
+                }
+            });
+        }
+
+        function renderFavoritesList() {
+            var listEl = document.getElementById('favorites-list');
+            if (favorites.length === 0) {
+                listEl.innerHTML = '<div class="empty-state"><div class="icon">🤍</div><p>还没有收藏内容</p><p style="font-size:0.9rem;">点击心形按钮收藏感兴趣的内容</p></div>';
+                return;
+            }
+            var html = '';
+            for (var i = 0; i < favorites.length; i++) {
+                var f = favorites[i];
+                html += '<div class="favorite-item" onclick="openFavorite(\'' + f.type + '\', \'' + f.id + '\')">' +
+                    '<div class="item-icon">' + f.icon + '</div>' +
+                    '<div class="item-info"><h4>' + f.name + '</h4><p>' + (f.type === 'event' ? '精彩活动' : f.type === 'food' ? '特色美食' : '非遗展演') + '</p></div>' +
+                    '<button class="remove-fav" onclick="event.stopPropagation(); toggleFavorite(\'' + f.type + '\', \'' + f.id + '\', \'' + f.name + '\', \'' + f.icon + '\')">&times;</button></div>';
+            }
+            listEl.innerHTML = html;
+        }
+
+        function openFavorite(type, id) {
+            toggleFavoritesPanel();
+            if (type === 'event') {
+                showEventDetail(id, null);
+            } else if (type === 'food') {
+                showFoodModal(id);
+            } else if (type === 'heritage') {
+                showHeritageModal(id);
+            }
+        }
+
+        function toggleFavoritesPanel() {
+            var panel = document.getElementById('favorites-panel');
+            var overlay = document.getElementById('panel-overlay');
+            panel.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function startAudioNarration(text, title) {
+            if (!('speechSynthesis' in window)) {
+                alert('您的浏览器不支持语音播报功能');
+                return;
+            }
+            stopAudioNarration();
+            currentAudioText = text;
+            document.getElementById('audio-title').textContent = title;
+            document.getElementById('audio-player').classList.add('active');
+            document.getElementById('audio-status').textContent = '点击播放按钮开始';
+            var playBtn = document.getElementById('audio-play-btn');
+            playBtn.textContent = '▶';
+            isPlaying = false;
+        }
+
+        function getChineseVoice() {
+            var availableVoices = speechSynthesis.getVoices();
+            var chineseVoice = availableVoices.find(function(v) {
+                return v.lang.indexOf('zh') !== -1 || v.lang.indexOf('CN') !== -1 || v.name.indexOf('中文') !== -1 || v.name.indexOf('中国') !== -1;
+            });
+            return chineseVoice || availableVoices[0];
+        }
+
+        function toggleAudioPlay() {
+            var playBtn = document.getElementById('audio-play-btn');
+            var statusEl = document.getElementById('audio-status');
+            if (isPlaying) {
+                speechSynthesis.pause();
+                playBtn.textContent = '▶';
+                statusEl.textContent = '已暂停';
+                isPlaying = false;
+            } else {
+                if (speechSynthesis.paused) {
+                    speechSynthesis.resume();
+                    playBtn.textContent = '⏸';
+                    statusEl.textContent = '播放中...';
+                    isPlaying = true;
+                } else {
+                    try {
+                        speechSynthesis.cancel();
+                        var utterance = new SpeechSynthesisUtterance(currentAudioText);
+                        utterance.lang = 'zh-CN';
+                        var chineseVoice = getChineseVoice();
+                        if (chineseVoice) {
+                            utterance.voice = chineseVoice;
+                        }
+                        utterance.rate = 0.95;
+                        utterance.pitch = 1;
+                        utterance.volume = 1;
+                        utterance.onend = function() {
+                            isPlaying = false;
+                            playBtn.textContent = '▶';
+                            statusEl.textContent = '播放完成';
+                        };
+                        utterance.onerror = function(event) {
+                            console.error('Speech error:', event);
+                            isPlaying = false;
+                            playBtn.textContent = '▶';
+                            statusEl.textContent = '播放出错';
+                        };
+                        speechSynthesis.speak(utterance);
+                        playBtn.textContent = '⏸';
+                        statusEl.textContent = '播放中...';
+                        isPlaying = true;
+                    } catch (e) {
+                        console.error('Speech error:', e);
+                        alert('语音播放失败，请检查浏览器设置');
+                    }
+                }
+            }
+        }
+
+        function stopAudioNarration() {
+            speechSynthesis.cancel();
+            isPlaying = false;
+        }
+
+        function closeAudioPlayer() {
+            stopAudioNarration();
+            document.getElementById('audio-player').classList.remove('active');
+        }
+
+        function showAudioText() {
+            if (currentAudioText) {
+                var modal = document.createElement('div');
+                modal.className = 'modal-overlay active';
+                modal.innerHTML = '<div class="modal-content" style="max-width: 600px;"><div class="modal-header"><h3>📝 导览文字</h3><button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</button></div><div class="modal-body" style="text-align:left;padding:2rem;"><p style="color:#555;line-height:1.8;white-space:pre-wrap;">' + currentAudioText + '</p></div></div>';
+                document.body.appendChild(modal);
+                modal.addEventListener('click', function(e) {
+                    if(e.target === modal) modal.remove();
+                });
+            }
+        }
+
+        var reviews = JSON.parse(localStorage.getItem('zhengding_reviews')) || {};
+
+        function getReviews(type, id) {
+            var key = type + '_' + id;
+            return reviews[key] || [];
+        }
+
+        function addReview(type, id, author, rating, content) {
+            var key = type + '_' + id;
+            if (!reviews[key]) reviews[key] = [];
+            reviews[key].unshift({
+                author: author || '游客',
+                rating: rating,
+                content: content,
+                time: new Date().toLocaleString('zh-CN')
+            });
+            localStorage.setItem('zhengding_reviews', JSON.stringify(reviews));
+        }
+
+        function renderReviews(type, id) {
+            var reviewList = getReviews(type, id);
+            if (reviewList.length === 0) {
+                return '<div class="empty-reviews"><div class="icon">📝</div><p>暂无评价，快来发表第一条评价吧！</p></div>';
+            }
+            var html = '';
+            for (var i = 0; i < reviewList.length; i++) {
+                var review = reviewList[i];
+                var stars = '';
+                for (var j = 1; j <= 5; j++) {
+                    stars += j <= review.rating ? '⭐' : '☆';
+                }
+                html += '<div class="review-item"><div class="review-header"><span class="review-author">' + review.author + '</span><span class="review-rating">' + stars + '</span></div><div class="review-time">' + review.time + '</div><div class="review-content">' + review.content + '</div></div>';
+            }
+            return '<div class="review-list">' + html + '</div>';
+        }
+
+        function getShareUrl() {
+            var url = window.location.href;
+            if (url.startsWith('file://') || url.includes('192.168.') || url.includes('localhost')) {
+                return 'https://polite-mooncake-034536.netlify.app/aivideo.html';
+            }
+            return url;
+        }
+
+        function openShare(platform, title) {
+            var url = getShareUrl();
+            var encodedUrl = encodeURIComponent(url);
+            var encodedTitle = encodeURIComponent(title);
+            
+            switch(platform) {
+                case 'wechat':
+                    showWechatShareModal(url, title);
+                    break;
+                case 'weibo':
+                    var weiboUrl = 'https://service.weibo.com/share/share.php?url=' + encodedUrl + '&title=' + encodedTitle;
+                    window.location.href = weiboUrl;
+                    break;
+                case 'qq':
+                    var qqUrl = 'https://connect.qq.com/widget/shareqq/index.html?url=' + encodedUrl + '&title=' + encodedTitle;
+                    window.location.href = qqUrl;
+                    break;
+                case 'copy':
+                    copyToClipboard(url);
+                    break;
+            }
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showToast('链接已复制到剪贴板！');
+                }).catch(function() {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('链接已复制到剪贴板！');
+                } else {
+                    showToast('复制失败，请手动复制');
+                }
+            } catch (err) {
+                showToast('复制失败，请手动复制');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showWechatShareModal(url, title) {
+            var modal = document.createElement('div');
+            modal.className = 'modal-overlay active';
+            modal.innerHTML = '<div class="modal-content" style="max-width: 360px;"><div class="modal-header"><h3>💬 微信分享</h3><button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</button></div><div class="modal-body" style="text-align:center;padding:2rem;"><div style="margin-bottom:1.5rem;padding:1rem;background:#f8f9fa;border-radius:8px;"><p style="font-size:0.85rem;color:#888;margin-bottom:0.5rem;">分享链接</p><p style="font-size:0.9rem;color:#666;word-break:break-all;margin-bottom:1rem;" id="wechat-share-url">' + url + '</p><button onclick="copyWechatLink()" style="padding:0.75rem 1.5rem;background:#07c160;color:white;border:none;border-radius:8px;cursor:pointer;font-size:1rem;">复制链接</button></div><p style="color:#666;margin-bottom:0.5rem;">复制后打开微信</p><p style="color:#999;font-size:0.9rem;">粘贴链接分享给好友</p></div></div>';
+            document.body.appendChild(modal);
+            window.currentShareUrl = url;
+            modal.addEventListener('click', function(e) {
+                if(e.target === modal) modal.remove();
+            });
+        }
+
+        function copyWechatLink() {
+            if (window.currentShareUrl) {
+                copyToClipboard(window.currentShareUrl);
+            }
+        }
+
+        function showToast(message) {
+            var toast = document.getElementById('share-toast');
+            toast.textContent = message;
+            toast.classList.add('active');
+            setTimeout(function() {
+                toast.classList.remove('active');
+            }, 2000);
+        }
+
+        function createReviewSection(type, id, name) {
+            var reviewsHtml = renderReviews(type, id);
+            var reviewCount = getReviews(type, id).length;
+            return '<div class="review-section"><h4>⭐ 游客评价' + (reviewCount > 0 ? ' (' + reviewCount + ')' : '') + '</h4><p style="color:#888;font-size:0.9rem;margin-bottom:1rem;">⬇️ 向下滚动查看更多内容</p>' + reviewsHtml + '<div class="review-form"><div class="rating-input" id="rating-stars"><span class="rating-star" onclick="setRating(1)">☆</span><span class="rating-star" onclick="setRating(2)">☆</span><span class="rating-star" onclick="setRating(3)">☆</span><span class="rating-star" onclick="setRating(4)">☆</span><span class="rating-star" onclick="setRating(5)">☆</span></div><textarea id="review-content" placeholder="分享您的体验..."></textarea><button class="submit-btn" onclick="submitReview(\'' + type + '\', \'' + id + '\', \'' + name + '\')">发表评价</button></div></div>';
+        }
+
+        var currentRating = 0;
+
+        function setRating(rating) {
+            currentRating = rating;
+            var stars = document.querySelectorAll('.rating-star');
+            stars.forEach(function(star, index) {
+                star.textContent = index < rating ? '⭐' : '☆';
+            });
+        }
+
+        function submitReview(type, id, name) {
+            var content = document.getElementById('review-content').value;
+            if (currentRating === 0) {
+                alert('请先选择评分');
+                return;
+            }
+            if (!content.trim()) {
+                alert('请输入评价内容');
+                return;
+            }
+            addReview(type, id, null, currentRating, content);
+            document.getElementById('review-content').value = '';
+            currentRating = 0;
+            var stars = document.querySelectorAll('.rating-star');
+            stars.forEach(function(star) {
+                star.textContent = '☆';
+            });
+            showToast('评价发表成功！');
+        }
+
+        function createShareSection(name) {
+            return '<div class="share-section"><h4 style="color:var(--primary-color);font-size:1.1rem;margin-bottom:0.8rem;">📤 分享</h4><button class="share-btn wechat" onclick="openShare(\'wechat\', \'' + name + '\')">💬 微信</button><button class="share-btn weibo" onclick="openShare(\'weibo\', \'' + name + '\')">📱 微博</button><button class="share-btn qq" onclick="openShare(\'qq\', \'' + name + '\')">🐧 QQ</button><button class="share-btn copy" onclick="openShare(\'copy\', \'' + name + '\')">🔗 复制链接</button></div>';
+        }
+
+        updateFavoritesCount();
+        renderFavoritesList();
+    </script>
+</body>
+</html>
